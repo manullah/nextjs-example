@@ -1,5 +1,5 @@
-import Axios, { AxiosError, AxiosResponse } from "axios";
-import { camelizeKeys, decamelizeKeys } from "humps";
+import Axios, { AxiosError, AxiosResponse } from 'axios';
+import { camelizeKeys, decamelizeKeys } from 'humps';
 
 const axios = Axios.create({
   baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -7,21 +7,14 @@ const axios = Axios.create({
 
 axios.interceptors.response.use(
   (response: AxiosResponse) => {
-    if (
-      response.data &&
-      response.headers["content-type"] === "application/json; charset=utf-8"
-    ) {
+    if (response.data && response.headers['content-type'] === 'application/json; charset=utf-8') {
       response.data = camelizeKeys(response.data);
     }
 
     return response;
   },
   (error: AxiosError) => {
-    if (
-      error.response?.data &&
-      error.response?.headers["content-type"] ===
-        "application/json; charset=utf-8"
-    ) {
+    if (error.response?.data && error.response?.headers['content-type'] === 'application/json; charset=utf-8') {
       error.response.data = camelizeKeys(error.response.data);
     }
 
@@ -32,11 +25,10 @@ axios.interceptors.response.use(
 axios.interceptors.request.use(async (config) => {
   const newConfig = { ...config };
 
-  if (newConfig.headers["Content-Type"] === "multipart/form-data")
-    return newConfig;
-  if (config.params) {
-    newConfig.params = decamelizeKeys(config.params);
-  }
+  if (newConfig.headers['Content-Type'] === 'multipart/form-data') return newConfig;
+  // if (config.params) {
+  //   newConfig.params = decamelizeKeys(config.params);
+  // }
   if (config.data) {
     newConfig.data = decamelizeKeys(config.data);
   }
