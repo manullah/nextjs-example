@@ -1,21 +1,14 @@
-import { Button, ButtonProps } from "@mantine/core";
+import { Button, ButtonProps } from '@mantine/core';
 
 type GoogleButtonProps = ButtonProps;
 
 export const GoogleButton: React.FC<GoogleButtonProps> = (props) => {
   const { ...rest } = props;
 
-  return (
-    <Button
-      leftIcon={<GoogleIcon />}
-      variant="default"
-      color="gray"
-      {...rest}
-    />
-  );
+  return <Button leftIcon={<GoogleIcon />} variant="default" color="gray" {...rest} />;
 };
 
-const GoogleIcon: React.FC<React.ComponentPropsWithoutRef<"svg">> = (props) => {
+const GoogleIcon: React.FC<React.ComponentPropsWithoutRef<'svg'>> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"

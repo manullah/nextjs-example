@@ -8,16 +8,8 @@ import {
   rem,
   NavbarProps,
 } from "@mantine/core";
-import {
-  IconHome2,
-  IconGauge,
-  IconDeviceDesktopAnalytics,
-  IconFingerprint,
-  IconCalendarStats,
-  IconUser,
-  IconSettings,
-} from "@tabler/icons-react";
 import { MantineLogo } from "@mantine/ds";
+import { MENUS } from "@/utils/constants/menu";
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -143,40 +135,16 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
-const mainLinksMockdata = [
-  { icon: IconHome2, label: "Home" },
-  { icon: IconGauge, label: "Dashboard" },
-  { icon: IconDeviceDesktopAnalytics, label: "Analytics" },
-  { icon: IconCalendarStats, label: "Releases" },
-  { icon: IconUser, label: "Account" },
-  { icon: IconFingerprint, label: "Security" },
-  { icon: IconSettings, label: "Settings" },
-];
-
-const linksMockdata = [
-  "Security",
-  "Settings",
-  "Dashboard",
-  "Releases",
-  "Account",
-  "Orders",
-  "Clients",
-  "Databases",
-  "Pull Requests",
-  "Open Issues",
-  "Wiki pages",
-];
-
 type OwnNavbarProps = Omit<NavbarProps, "children">;
 
 export const OwnNavbar: React.FC<OwnNavbarProps> = (props) => {
   const { ...rest } = props;
 
   const { classes, cx } = useStyles();
-  const [active, setActive] = useState("Releases");
-  const [activeLink, setActiveLink] = useState("Settings");
+  const [active, setActive] = useState(MENUS[0].label);
+  const [activeLink, setActiveLink] = useState(MENUS[0].links[0].label);
 
-  const mainLinks = mainLinksMockdata.map((link) => (
+  const mainLinks = MENUS.map((link) => (
     <Tooltip
       label={link.label}
       position="right"
@@ -195,24 +163,26 @@ export const OwnNavbar: React.FC<OwnNavbarProps> = (props) => {
     </Tooltip>
   ));
 
-  const links = linksMockdata.map((link) => (
+  const menuActived = MENUS.find((item) => item.label === active);
+  const haveLinks = menuActived?.links.length || 0 > 0;
+  const links = menuActived?.links.map((link, index) => (
     <a
-      className={cx(classes.link, {
-        [classes.linkActive]: activeLink === link,
-      })}
+      key={index}
       href="/"
+      className={cx(classes.link, {
+        [classes.linkActive]: activeLink === link.label,
+      })}
       onClick={(event) => {
         event.preventDefault();
-        setActiveLink(link);
+        setActiveLink(link.label);
       }}
-      key={link}
     >
-      {link}
+      {link.label}
     </a>
   ));
 
   return (
-    <Navbar width={{ sm: 300 }} {...rest}>
+    <Navbar width={{ sm: haveLinks ? 300 : rem(60) }} {...rest}>
       <Navbar.Section grow className={classes.wrapper}>
         <div className={classes.aside}>
           <div className={classes.logo}>
@@ -220,13 +190,16 @@ export const OwnNavbar: React.FC<OwnNavbarProps> = (props) => {
           </div>
           {mainLinks}
         </div>
-        <div className={classes.main}>
-          <Title order={4} className={classes.title}>
-            {active}
-          </Title>
 
-          {links}
-        </div>
+        {haveLinks && (
+          <div className={classes.main}>
+            <Title order={4} className={classes.title}>
+              {active}
+            </Title>
+
+            {links}
+          </div>
+        )}
       </Navbar.Section>
     </Navbar>
   );

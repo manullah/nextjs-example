@@ -1,6 +1,6 @@
-import { OwnHeader, OwnNavbar } from "@/components";
-import { AppShell } from "@mantine/core";
-import { useDisclosure } from "@mantine/hooks";
+import { OwnHeader, OwnNavbar } from '@/components';
+import { AppShell } from '@mantine/core';
+import { useDisclosure } from '@mantine/hooks';
 
 type DashboardLayoutProps = {
   children: React.ReactNode;
@@ -19,9 +19,9 @@ const DashboardLayout: React.FC<DashboardLayoutProps> = (props) => {
       header={
         <OwnHeader
           user={{
-            name: "John Die",
+            name: 'John Die',
             image:
-              "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWje_gjVcmi-wks5nTRnW_xv5W2l3MVnk7W1QDcZuhNg&s",
+              'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTWje_gjVcmi-wks5nTRnW_xv5W2l3MVnk7W1QDcZuhNg&s',
           }}
           opened={opened}
           toggle={toggle}
