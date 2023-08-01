@@ -14,6 +14,9 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Library Usage
 
+- [x] Eslint
+- [x] Prettier
+- [x] Husky
 - [x] Mantine.dev
 - [x] Mantine Datatable
 - [ ] Mantine Form
