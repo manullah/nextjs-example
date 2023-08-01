@@ -6,12 +6,11 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Table of Contents
 
-1. Getting Started
-2. Folder Structure
-3. Styling
-4. Data Fetching
-5. State Management
-6. Error Handling
+1. Folder Structure
+2. Styling
+3. Data Fetching
+4. State Management
+5. Error Handling
 
 ## Library Usage
 
