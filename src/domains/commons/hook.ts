@@ -5,16 +5,16 @@ export const useFilterHook = <T extends object>(props: T) => {
   const { currentPage, pageSize, setCurrentPage, setPageSize } = useOwnPagination();
 
   const [filters, setFilters] = useState<T>({
-    currentPage,
-    pageSize,
+    page: currentPage,
+    perPage: pageSize,
     ...props,
   });
 
   useEffect(() => {
     setFilters((prev) => ({
       ...prev,
-      currentPage,
-      pageSize,
+      page: currentPage,
+      perPage: pageSize,
       ...props,
     }));
   }, [props, currentPage, pageSize]);
